@@ -1,16 +1,16 @@
 package com.dtunctuncer.todoist.project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.dtunctuncer.todoist.R;
 import com.dtunctuncer.todoist.TodoApp;
 import com.dtunctuncer.todoist.api.response.ProjectResponse;
 import com.dtunctuncer.todoist.core.AdapterOnClickListener;
 import com.dtunctuncer.todoist.core.BaseActivity;
-import com.dtunctuncer.todoist.db.Project;
+import com.dtunctuncer.todoist.task.TaskActivity;
 
 import java.util.List;
 
@@ -60,7 +60,9 @@ public class ProjectActivity extends BaseActivity implements ProjectView, Adapte
     @Override
     public void onClick(View view, int position) {
         ProjectResponse item = adapter.getItem(position);
+        Intent intent = new Intent(this, TaskActivity.class);
+        intent.putExtra("project_id", item.getId());
 
-        Toast.makeText(this, item.getName(), Toast.LENGTH_SHORT).show();
+        startActivity(intent);
     }
 }
